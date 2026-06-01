@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
   <style>
     :root {
       --primary: #00ffff;
@@ -27,7 +28,7 @@
     body {
       width: 100%;
       height: 100%;
-      overflow: hidden;
+      overflow-x: hidden;
     }
 
     body {
@@ -41,7 +42,6 @@
 
     #root {
       width: 100%;
-      height: 100%;
       position: relative;
     }
 
@@ -68,25 +68,22 @@
     }
 
     @keyframes glowDrift {
-      0%, 100% {
-        opacity: 0.8;
-      }
-      50% {
-        opacity: 1;
-      }
+      0%, 100% { opacity: 0.8; }
+      50% { opacity: 1; }
     }
 
     .content {
       position: relative;
       z-index: 10;
       width: 100%;
-      height: 100%;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
       pointer-events: none;
+      padding: 2rem;
     }
 
     .content > * {
@@ -110,23 +107,18 @@
     }
 
     @keyframes gradientShift {
-      0%, 100% {
-        background-position: 0% 50%;
-      }
-      50% {
-        background-position: 100% 50%;
-      }
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
     }
 
     @keyframes fadeInDown {
-      from {
-        opacity: 0;
-        transform: translateY(40px) blur(10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) blur(0);
-      }
+      from { opacity: 0; transform: translateY(40px) blur(10px); }
+      to { opacity: 1; transform: translateY(0) blur(0); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(-40px) blur(10px); }
+      to { opacity: 1; transform: translateY(0) blur(0); }
     }
 
     p {
@@ -137,17 +129,7 @@
       font-weight: 300;
       letter-spacing: 0.03em;
       line-height: 1.6;
-    }
-
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(-40px) blur(10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) blur(0);
-      }
+      max-width: 600px;
     }
 
     .buttons {
@@ -232,23 +214,13 @@
     }
 
     @keyframes floatDown {
-      0%, 100% {
-        transform: translateX(-50%) translateY(0);
-      }
-      50% {
-        transform: translateX(-50%) translateY(-15px);
-      }
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-15px); }
     }
 
     @keyframes scrollBounce {
-      0% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      100% {
-        opacity: 0;
-        transform: translateY(15px);
-      }
+      0% { opacity: 1; transform: translateY(0); }
+      100% { opacity: 0; transform: translateY(15px); }
     }
 
     #cursor-glow {
@@ -355,6 +327,26 @@
       section {
         padding: 4rem 1.5rem;
       }
+
+      .scroll-indicator {
+        bottom: 2rem;
+        font-size: 0.65rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      section {
+        padding: 3rem 1rem;
+        min-height: auto;
+      }
+
+      .scroll-indicator {
+        display: none;
+      }
     }
   </style>
 </head>
@@ -362,6 +354,7 @@
 <body>
   <canvas id="stars"></canvas>
   <div class="glow"></div>
+  <div id="cursor-glow"></div>
 
   <div id="root">
     <div class="content">
@@ -369,8 +362,8 @@
       <p>Build experiences beyond reality</p>
 
       <div class="buttons">
-        <button>Explore the Universe</button>
-        <button>View Portfolio</button>
+        <button onclick="scrollToSection('about')">Explore Universe</button>
+        <button onclick="scrollToSection('services')">Our Services</button>
       </div>
 
       <div class="scroll-indicator">
@@ -386,6 +379,7 @@
           <p class="section-description">
             We craft immersive digital experiences that transcend the boundaries of traditional web design. 
             Every interaction is a journey through a meticulously crafted universe of light, motion, and meaning.
+            This is premium digital artistry at its finest.
           </p>
         </div>
       </section>
@@ -395,7 +389,8 @@
           <h2 class="section-title">Our Services</h2>
           <p class="section-description">
             From conceptual design to final execution, we transform your vision into a cinematic digital experience.
-            Each project is an opportunity to push creative boundaries and deliver premium interactive solutions.
+            Each project is an opportunity to push creative boundaries and deliver premium interactive solutions
+            that feel like navigating a living universe.
           </p>
         </div>
       </section>
@@ -405,24 +400,365 @@
           <h2 class="section-title">Portfolio Constellation</h2>
           <p class="section-description">
             Explore our collection of award-winning projects that showcase the intersection of art and technology.
-            Each piece represents our commitment to excellence and innovation.
+            Each piece represents our commitment to excellence, innovation, and creating experiences
+            that transcend ordinary web design into premium digital art.
           </p>
         </div>
       </section>
 
       <section id="contact">
         <div class="section-content">
-          <h2 class="section-title">Get in Touch</h2>
+          <h2 class="section-title">Reach Across the Stars</h2>
           <p class="section-description">
-            Ready to launch your next cosmic project? Reach out and let's create something extraordinary together.
+            Ready to launch your next cosmic project? Get in touch and let's create something extraordinary together.
+            We're excited to collaborate with visionary brands and bring your digital dreams to reality.
           </p>
+          <div class="buttons" style="margin-top: 2rem;">
+            <button>Get Started</button>
+          </div>
         </div>
       </section>
     </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.0.42/dist/lenis.min.js"></script>
-  <script src="./script.js"></script>
+  <script>
+    // ============================================
+    // COSMIC UNIVERSE - CINEMATIC EXPERIENCE
+    // ============================================
+
+    const canvas = document.getElementById("stars");
+    const ctx = canvas.getContext("2d");
+
+    let w, h;
+    let stars = [];
+    let particles = [];
+    let nebulaClouds = [];
+    let time = 0;
+
+    function init() {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+
+      stars = [];
+      for (let layer = 0; layer < 3; layer++) {
+        const layerStars = 300 - layer * 50;
+        for (let i = 0; i < layerStars; i++) {
+          stars.push({
+            x: Math.random() * w,
+            y: Math.random() * h,
+            r: Math.random() * (1.5 - layer * 0.3),
+            s: Math.random() * 0.4 + 0.1,
+            opacity: Math.random() * 0.5 + 0.3,
+            layer: layer,
+            vx: (Math.random() - 0.5) * 0.02,
+            vy: (Math.random() - 0.5) * 0.02,
+            twinkle: Math.random() * Math.PI * 2,
+            twinkleSpeed: Math.random() * 0.02 + 0.005
+          });
+        }
+      }
+
+      particles = [];
+      for (let i = 0; i < 1500; i++) {
+        particles.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          r: Math.random() * 0.5 + 0.2,
+          vx: (Math.random() - 0.5) * 0.3,
+          vy: (Math.random() - 0.5) * 0.3,
+          opacity: Math.random() * 0.3 + 0.05,
+          color: ['rgba(0, 255, 255,', 'rgba(255, 0, 255,', 'rgba(74, 144, 226,'][Math.floor(Math.random() * 3)]
+        });
+      }
+
+      nebulaClouds = [];
+      for (let i = 0; i < 5; i++) {
+        nebulaClouds.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          r: Math.random() * 200 + 150,
+          opacity: Math.random() * 0.15 + 0.05,
+          color: ['rgba(0, 255, 255,', 'rgba(255, 0, 255,', 'rgba(120, 0, 255,'][Math.floor(Math.random() * 3)],
+          vx: (Math.random() - 0.5) * 0.05,
+          vy: (Math.random() - 0.5) * 0.05,
+          pulse: Math.random() * Math.PI * 2
+        });
+      }
+    }
+
+    function drawStars() {
+      stars.forEach((star) => {
+        star.x += star.vx;
+        star.y += star.vy;
+
+        if (star.x > w) star.x = 0;
+        if (star.x < 0) star.x = w;
+        if (star.y > h) star.y = 0;
+        if (star.y < 0) star.y = h;
+
+        star.twinkle += star.twinkleSpeed;
+        const twinkleOpacity = star.opacity * (Math.sin(star.twinkle) * 0.5 + 0.5);
+
+        ctx.fillStyle = `rgba(255, 255, 255, ${twinkleOpacity})`;
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = `rgba(0, 255, 255, ${twinkleOpacity * 0.3})`;
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.r * 2, 0, Math.PI * 2);
+        ctx.fill();
+      });
+    }
+
+    function drawParticles() {
+      particles.forEach((particle) => {
+        particle.x += particle.vx;
+        particle.y += particle.vy;
+
+        particle.vx += (Math.random() - 0.5) * 0.1;
+        particle.vy += (Math.random() - 0.5) * 0.1;
+
+        const maxV = 1;
+        if (Math.abs(particle.vx) > maxV) particle.vx = (particle.vx / Math.abs(particle.vx)) * maxV;
+        if (Math.abs(particle.vy) > maxV) particle.vy = (particle.vy / Math.abs(particle.vy)) * maxV;
+
+        if (particle.x > w) particle.x = 0;
+        if (particle.x < 0) particle.x = w;
+        if (particle.y > h) particle.y = 0;
+        if (particle.y < 0) particle.y = h;
+
+        ctx.fillStyle = `${particle.color}${particle.opacity})`;
+        ctx.beginPath();
+        ctx.arc(particle.x, particle.y, particle.r, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = `${particle.color}${particle.opacity * 0.5})`;
+        ctx.beginPath();
+        ctx.arc(particle.x, particle.y, particle.r * 2.5, 0, Math.PI * 2);
+        ctx.fill();
+      });
+    }
+
+    function drawNebulaClouds() {
+      nebulaClouds.forEach((cloud) => {
+        cloud.x += cloud.vx;
+        cloud.y += cloud.vy;
+
+        cloud.pulse += 0.001;
+        const pulseScale = Math.sin(cloud.pulse) * 0.1 + 0.95;
+
+        if (cloud.x > w + 300) cloud.x = -300;
+        if (cloud.x < -300) cloud.x = w + 300;
+        if (cloud.y > h + 300) cloud.y = -300;
+        if (cloud.y < -300) cloud.y = h + 300;
+
+        const gradient = ctx.createRadialGradient(cloud.x, cloud.y, 0, cloud.x, cloud.y, cloud.r * pulseScale);
+        gradient.addColorStop(0, `${cloud.color}${cloud.opacity * 0.8})`);
+        gradient.addColorStop(0.5, `${cloud.color}${cloud.opacity * 0.4})`);
+        gradient.addColorStop(1, `${cloud.color}0)`);
+
+        ctx.fillStyle = gradient;
+        ctx.fillRect(cloud.x - cloud.r * pulseScale, cloud.y - cloud.r * pulseScale, cloud.r * pulseScale * 2, cloud.r * pulseScale * 2);
+      });
+    }
+
+    function drawLensFlares() {
+      if (Math.random() > 0.998) {
+        const flareX = Math.random() * w;
+        const flareY = Math.random() * h;
+
+        for (let i = 5; i > 0; i--) {
+          ctx.fillStyle = `rgba(255, 255, 255, ${0.1 / i})`;
+          ctx.beginPath();
+          ctx.arc(flareX, flareY, 50 * i, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+    }
+
+    function animate() {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillRect(0, 0, w, h);
+
+      time += 0.016;
+
+      drawNebulaClouds();
+      drawParticles();
+      drawStars();
+      drawLensFlares();
+
+      requestAnimationFrame(animate);
+    }
+
+    function initCursorGlow() {
+      const cursorGlow = document.getElementById('cursor-glow');
+      if (!cursorGlow) return;
+
+      document.addEventListener('mousemove', (e) => {
+        cursorGlow.style.left = e.clientX + 'px';
+        cursorGlow.style.top = e.clientY + 'px';
+      });
+
+      document.addEventListener('mouseleave', () => {
+        cursorGlow.style.opacity = '0';
+      });
+
+      document.addEventListener('mouseenter', () => {
+        cursorGlow.style.opacity = '0.8';
+      });
+    }
+
+    function initLenisScroll() {
+      if (typeof Lenis !== 'undefined') {
+        const lenis = new Lenis({
+          duration: 1.2,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          direction: 'vertical',
+          gestureDirection: 'vertical',
+          smooth: true,
+          mouseMultiplier: 1,
+          smoothTouch: false,
+          touchMultiplier: 2,
+          infinite: false
+        });
+
+        function raf(time) {
+          lenis.raf(time);
+          requestAnimationFrame(raf);
+        }
+
+        requestAnimationFrame(raf);
+      }
+    }
+
+    function initButtonEffects() {
+      const buttons = document.querySelectorAll('button');
+
+      buttons.forEach((button) => {
+        button.addEventListener('mouseenter', () => {
+          button.style.transform = 'translateY(-4px) scale(1.08)';
+        });
+
+        button.addEventListener('mouseleave', () => {
+          button.style.transform = 'translateY(0) scale(1)';
+        });
+
+        button.addEventListener('click', (e) => {
+          const rect = button.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+
+          const ripple = document.createElement('span');
+          ripple.style.position = 'absolute';
+          ripple.style.width = '20px';
+          ripple.style.height = '20px';
+          ripple.style.background = 'radial-gradient(circle, rgba(255, 255, 255, 0.5), transparent)';
+          ripple.style.borderRadius = '50%';
+          ripple.style.transform = `translate(${x - 10}px, ${y - 10}px)`;
+          ripple.style.pointerEvents = 'none';
+          ripple.style.animation = 'rippleEffect 0.6s ease-out';
+
+          const style = document.createElement('style');
+          if (!document.querySelector('style[data-ripple]')) {
+            style.setAttribute('data-ripple', '');
+            style.textContent = `
+              @keyframes rippleEffect {
+                from {
+                  transform: translate(-50%, -50%) scale(1);
+                  opacity: 1;
+                }
+                to {
+                  transform: translate(-50%, -50%) scale(4);
+                  opacity: 0;
+                }
+              }
+            `;
+            document.head.appendChild(style);
+          }
+
+          button.style.position = 'relative';
+          button.style.overflow = 'hidden';
+          button.appendChild(ripple);
+
+          setTimeout(() => ripple.remove(), 600);
+        });
+      });
+    }
+
+    function initScrollEffects() {
+      window.addEventListener('scroll', () => {
+        const scrollPercent = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+        const glow = document.querySelector('.glow');
+
+        if (glow) {
+          glow.style.opacity = Math.max(0.3, 1 - scrollPercent * 0.5);
+        }
+      });
+    }
+
+    function scrollToSection(sectionId) {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    window.addEventListener('resize', init);
+
+    document.addEventListener('DOMContentLoaded', () => {
+      init();
+      animate();
+      initCursorGlow();
+      initLenisScroll();
+      initButtonEffects();
+      initScrollEffects();
+
+      const sections = document.querySelectorAll('section');
+      const observerOptions = {
+        threshold: 0.2,
+        rootMargin: '0px 0px -100px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.animation = 'fadeInUp 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards';
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      sections.forEach((section) => {
+        section.style.opacity = '0';
+        observer.observe(section);
+      });
+    });
+
+    // Add fade-in animation for sections
+    if (!document.querySelector('style[data-section-anim]')) {
+      const style = document.createElement('style');
+      style.setAttribute('data-section-anim', '');
+      style.textContent = `
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(60px) blur(10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0) blur(0);
+          }
+        }
+
+        .section-content {
+          animation: fadeInUp 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+      `;
+      document.head.appendChild(style);
+    }
+  </script>
 </body>
 
 </html>
