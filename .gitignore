@@ -1,0 +1,1 @@
+# Dependencies\nnode_modules/\nnpm-debug.log*\nyarn-debug.log*\nyarn-error.log*\npnpm-debug.log*\n\n# Build outputs\ndist/\nbuild/\n.next/\nout/\n\n# IDE\n.vscode/\n.idea/\n*.swp\n*.swo\n*~\n\n# OS\n.DS_Store\nThumbs.db\n\n# Environment\n.env\n.env.local\n.env.*.local\n\n# Cache\n.cache/\n.eslintcache\n\n# Testing\ncoverage/\n.nyc_output/
